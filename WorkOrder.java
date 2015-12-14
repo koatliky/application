@@ -1,9 +1,10 @@
 package application;
 
+import java.util.Date;
 /**
  * Write a description of class WorkOrder here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
 import java.util.Scanner;
@@ -14,7 +15,9 @@ public class WorkOrder
     private final int ID=1000;
     public int id;
     public String description;
+    public String briefDescription;
     public Person assignTo;
+    private static int increment = 0;
 
     /**
      * Constructor for objects of class WorkOrder
@@ -34,23 +37,58 @@ public class WorkOrder
         Tech assignTo=new Tech();
         System.out.println("Tech name: John Doe");
         System.out.println("Tech specialization: Plumbing");
-        
+
     }
 
-    public int getId()
+    public void setID()
+    {
+        id=ID+increment;
+        this.increment++;
+    }
+
+    public int getID()
     {
         return id;
     }
-    
-    public String description()
+
+    public Date setDate()
+    {
+        Date date = new Date();
+        return date;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public String getDescription()
     {
         return description;
     }
-    
+
+    public void setBriefDescription(String briefDescription)
+    {
+        this.briefDescription = briefDescription;
+    }
+
+    public String getBriefDescription()
+    {
+        return briefDescription;
+    }
+
+    /**public Property addAsset (String ID)
+    {
+        return
+    }**/
+
     public String getTechName()
     {
         return assignTo.getName();
     }
-    
 
+    public void main (String[] args)
+    {
+
+    }
 }
