@@ -330,6 +330,99 @@ One of the applications of ArrayLists was to keep track of a technician's skills
 </pre></div>
 
 <h2>
+<a id="different-method-types" class="anchor" href="#different-method-types" aria-hidden="true"><span class="octicon octicon-link"></span></a>Different method types</h2>
+
+<h3>
+<a id="constructors" class="anchor" href="#constructors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Constructors</h3>
+
+<p>Every class in the program has its constructor. The superclass Appliance uses overloading to cover both cases, when a user has no info and when a user has all the necessary info:</p>
+
+<div class="highlight highlight-source-java"><pre>
+    <span class="pl-c">/**</span>
+<span class="pl-c">     * Constructor for objects of class Appliance used when no info about an appliance is provided</span>
+<span class="pl-c">     */</span>
+    <span class="pl-k">public</span> Appliance(){ }
+
+    <span class="pl-c">/**</span>
+<span class="pl-c">     * Constructor for objects of class Appliance used when the initial information is provided</span>
+<span class="pl-c">     */</span>
+    <span class="pl-k">public</span> <span class="pl-smi">Appliance</span> (<span class="pl-smi">String</span> manufacturer, <span class="pl-smi">String</span> model, <span class="pl-smi">String</span> serial)
+    {
+        <span class="pl-v">this</span><span class="pl-k">.</span>model<span class="pl-k">=</span>model;
+        <span class="pl-v">this</span><span class="pl-k">.</span>serial<span class="pl-k">=</span>serial;
+        <span class="pl-v">this</span><span class="pl-k">.</span>setManufacturer(manufacturer);
+    }
+</pre></div>
+
+<h3>
+<a id="getters-and-setters" class="anchor" href="#getters-and-setters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getters and Setters</h3>
+
+<p>Are used in every class to allow adding and retrieving values:</p>
+
+<div class="highlight highlight-source-java"><pre>
+
+    <span class="pl-k">public</span> <span class="pl-k">int</span> getID()
+    {
+        <span class="pl-k">return</span> id;
+    }
+
+    <span class="pl-k">public</span> <span class="pl-smi">Date</span> setDate()
+    {
+        <span class="pl-smi">Date</span> date <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Date</span>();
+        <span class="pl-k">return</span> date;
+    }
+
+    <span class="pl-k">public</span> <span class="pl-k">void</span> setDescription(<span class="pl-smi">String</span> description)
+    {
+        <span class="pl-v">this</span><span class="pl-k">.</span>description <span class="pl-k">=</span> description;
+    }
+
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> getDescription()
+    {
+        <span class="pl-k">return</span> description;
+    }
+
+    <span class="pl-k">public</span> <span class="pl-k">void</span> setBriefDescription(<span class="pl-smi">String</span> briefDescription)
+    {
+        <span class="pl-v">this</span><span class="pl-k">.</span>briefDescription <span class="pl-k">=</span> briefDescription;
+    }
+
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> getBriefDescription()
+    {
+        <span class="pl-k">return</span> briefDescription;
+    }
+</pre></div>
+
+<h3>
+<a id="tostring-methods" class="anchor" href="#tostring-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>ToString methods</h3>
+
+<p>The Class Company has a toString method used to easily get basic information:</p>
+
+<div class="highlight highlight-source-java"><pre>
+    <span class="pl-k">public</span> <span class="pl-smi">String</span> toString()
+    {
+        <span class="pl-k">return</span> (<span class="pl-s"><span class="pl-pds">"</span>Your company: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-smi">Company</span><span class="pl-k">.</span>name <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>Your comapny has <span class="pl-pds">"</span></span> <span class="pl-k">+</span> numberOfTechs <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>:<span class="pl-pds">"</span></span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>);
+    }
+</pre></div>
+
+<h3>
+<a id="use-of-static-variables" class="anchor" href="#use-of-static-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use of static variables</h3>
+
+<p>The Class WorkOrder uses a static variable for the increment value to generate IDs. This allows keep track of the increment vithout calling an object:</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">WorkOrder</span>
+{
+    <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-k">int</span> <span class="pl-c1">ID</span><span class="pl-k">=</span><span class="pl-c1">1000</span>;
+    <span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">int</span> increment <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+
+    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">setID</span>()
+    {
+        id<span class="pl-k">=</span><span class="pl-c1">ID</span><span class="pl-k">+</span>increment;
+        <span class="pl-v">this</span><span class="pl-k">.</span>increment<span class="pl-k">++</span>;
+    }
+</pre></div>
+
+<h2>
 <a id="uml-diagram-and-use-cases" class="anchor" href="#uml-diagram-and-use-cases" aria-hidden="true"><span class="octicon octicon-link"></span></a>UML Diagram and Use Cases</h2>
 
 <p><img src="https://lh3.googleusercontent.com/-anNHokI2Gm4/VnAXuSTVP9I/AAAAAAAABQg/yHZevhVtESE/s912-Ic42/UMLDiagram.png" alt="UML"></p>
@@ -344,6 +437,114 @@ One of the applications of ArrayLists was to keep track of a technician's skills
 <p>The current version of the Application has 2 groups of inheritances:
 Appliance -&gt;Dishwasher, Fridge, Dryer
 Person -&gt; User, Tech</p>
+
+<p>Aggregations: WorkOrder "has-a" Property "has-a" Appliance.</p>
+
+<h3>
+<a id="use-of-exceptions" class="anchor" href="#use-of-exceptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use of exceptions</h3>
+
+<p>Exceptions are used throughout the appliacation. One of them is used to validate e-mail address of a user:</p>
+
+<div class="highlight highlight-source-java"><pre>
+         <span class="pl-c">/** </span>
+<span class="pl-c">         * Sets the valid email address.</span>
+<span class="pl-c">         * </span>
+<span class="pl-c">         * @param email address as a sring.</span>
+<span class="pl-c">         * @throws IlligalArgumentException if the email address does not contain "@" or "."</span>
+<span class="pl-c">         */</span>
+        <span class="pl-k">public</span> <span class="pl-smi">String</span> emailValidation(<span class="pl-smi">String</span> email) {
+
+        <span class="pl-k">if</span> (<span class="pl-k">!</span>email<span class="pl-k">.</span>contains(<span class="pl-s"><span class="pl-pds">"</span>@<span class="pl-pds">"</span></span>))
+        {
+            <span class="pl-c">// Enforce preconditions specified above</span>
+            <span class="pl-k">throw</span> <span class="pl-k">new</span> <span class="pl-smi">IllegalArgumentException</span>(<span class="pl-s"><span class="pl-pds">"</span>Please, enter a valid e-mail address<span class="pl-pds">"</span></span>);
+        }
+        <span class="pl-k">return</span> email;
+    }
+</pre></div>
+
+<h2>
+<a id="file-io" class="anchor" href="#file-io" aria-hidden="true"><span class="octicon octicon-link"></span></a>File I/O</h2>
+
+<p>BufferedReader (File in) is mainly used to have access to an Excel file with inventory to keep track of parts:</p>
+
+<div class="highlight highlight-source-java"><pre>
+    <span class="pl-k">public</span> <span class="pl-k">void</span> findParts (<span class="pl-smi">String</span> modelNumber)
+    {
+        <span class="pl-k">String</span>[] data;
+        <span class="pl-k">try</span> {
+            reader <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">BufferedReader</span>(<span class="pl-k">new</span> <span class="pl-smi">FileReader</span>(<span class="pl-s"><span class="pl-pds">"</span>washParts.csv<span class="pl-pds">"</span></span>));
+            <span class="pl-smi">String</span> line<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>;
+             <span class="pl-k">while</span> (line <span class="pl-k">!=</span> <span class="pl-c1">null</span>)
+                {
+                    line <span class="pl-k">=</span> reader<span class="pl-k">.</span>readLine();
+                    data<span class="pl-k">=</span>line<span class="pl-k">.</span>split(<span class="pl-s"><span class="pl-pds">"</span>,<span class="pl-pds">"</span></span>);
+                    <span class="pl-k">if</span> (data[<span class="pl-c1">0</span>]<span class="pl-k">.</span>equals(modelNumber))
+                    {
+                    <span class="pl-k">for</span> (<span class="pl-k">int</span> i<span class="pl-k">=</span><span class="pl-c1">1</span>; i<span class="pl-k">&lt;</span>data<span class="pl-k">.</span>length; i <span class="pl-k">+=</span> <span class="pl-c1">2</span>){
+                       <span class="pl-smi">String</span> temp <span class="pl-k">=</span> data[i<span class="pl-k">+</span><span class="pl-c1">1</span>];
+                       <span class="pl-k">int</span> number <span class="pl-k">=</span> <span class="pl-smi">Integer</span><span class="pl-k">.</span>parseInt(temp);
+                       <span class="pl-k">if</span> (number<span class="pl-k">!=</span><span class="pl-c1">0</span>)
+                       {
+                       parts<span class="pl-k">.</span>put(data[i], number);  
+                    }
+                     }
+                }
+            }
+            reader<span class="pl-k">.</span>close();
+        }
+        <span class="pl-k">catch</span>(<span class="pl-smi">FileNotFoundException</span> e) {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>File missing<span class="pl-pds">"</span></span>);
+        }
+        <span class="pl-k">catch</span>(<span class="pl-smi">IOException</span> e) {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>NO!<span class="pl-pds">"</span></span>);
+        }
+    }
+</pre></div>
+
+<p>FileWriter is used to save the info about a company:</p>
+
+<div class="highlight highlight-source-java"><pre>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">Company</span>
+{
+    <span class="pl-k">ArrayList&lt;<span class="pl-smi">Tech</span>&gt;</span> techs <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">Tech</span>&gt;</span>();
+    <span class="pl-smi">String</span> answer;
+    <span class="pl-k">static</span> <span class="pl-smi">String</span> name;
+    <span class="pl-k">int</span> techsNumber;
+    <span class="pl-k">int</span> dispNumber;
+    <span class="pl-smi">FileReader</span> in <span class="pl-k">=</span> <span class="pl-c1">null</span>;
+    <span class="pl-smi">FileWriter</span> out <span class="pl-k">=</span> <span class="pl-c1">null</span>;
+    <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">int</span> numberOfTechs;
+
+    <span class="pl-k">public</span> <span class="pl-en">Company</span>(<span class="pl-smi">String</span> <span class="pl-v">name</span>) <span class="pl-k">throws</span> <span class="pl-smi">IOException</span>
+    {
+        <span class="pl-smi">Company</span><span class="pl-k">.</span>name<span class="pl-k">=</span>name;
+        out <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">FileWriter</span>(<span class="pl-s"><span class="pl-pds">"</span>company.txt<span class="pl-pds">"</span></span>);
+        out<span class="pl-k">.</span>write(<span class="pl-s"><span class="pl-pds">"</span>The company name: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> name);
+        out<span class="pl-k">.</span>write(<span class="pl-smi">System</span><span class="pl-k">.</span>lineSeparator());
+        out<span class="pl-k">.</span>close();
+
+}
+
+    <span class="pl-k">public</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">Tech</span>&gt;</span> <span class="pl-en">addTechnicains</span> (<span class="pl-k">int</span> <span class="pl-v">numberOfTechs</span>) <span class="pl-k">throws</span> <span class="pl-smi">IOException</span>
+    {
+        <span class="pl-smi">Company</span><span class="pl-k">.</span>numberOfTechs <span class="pl-k">=</span> numberOfTechs;
+        <span class="pl-k">for</span> (<span class="pl-k">int</span> i<span class="pl-k">=</span><span class="pl-c1">0</span>; i<span class="pl-k">&lt;</span>numberOfTechs; i<span class="pl-k">++</span>)
+        {
+            <span class="pl-smi">Tech</span> tech <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">Tech</span>();
+            tech<span class="pl-k">.</span>createTech();
+            out <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">FileWriter</span>(<span class="pl-s"><span class="pl-pds">"</span>company.txt<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>);
+            out<span class="pl-k">.</span>write(name <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> has <span class="pl-pds">"</span></span> <span class="pl-k">+</span> numberOfTechs <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> techs<span class="pl-pds">"</span></span>);
+            out<span class="pl-k">.</span>write(<span class="pl-smi">System</span><span class="pl-k">.</span>lineSeparator());
+            out<span class="pl-k">.</span>write(<span class="pl-s"><span class="pl-pds">"</span>Technician <span class="pl-pds">"</span></span> <span class="pl-k">+</span> i<span class="pl-k">+</span><span class="pl-c1">1</span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>:<span class="pl-pds">"</span></span>);
+            out<span class="pl-k">.</span>write(<span class="pl-smi">System</span><span class="pl-k">.</span>lineSeparator());
+            out<span class="pl-k">.</span>write(tech<span class="pl-k">.</span>firstName <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> <span class="pl-k">+</span> tech<span class="pl-k">.</span>lastName);
+            out<span class="pl-k">.</span>write(<span class="pl-smi">System</span><span class="pl-k">.</span>lineSeparator());
+    }
+            out<span class="pl-k">.</span>close();
+            <span class="pl-k">return</span> techs;
+    }
+</pre></div>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/koatliky/application">Application</a> is maintained by <a href="https://github.com/koatliky">koatliky</a>.</span>
