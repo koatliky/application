@@ -202,6 +202,110 @@ information.</p>
     }
 }</pre></div>
 
+<p>The second Enum class is used to set schedule based on the same principle:</p>
+
+<div class="highlight highlight-source-java"><pre>    <span class="pl-k">public</span> <span class="pl-k">enum</span> <span class="pl-en">Schedule</span> {
+        <span class="pl-c1">MONDAY</span>(<span class="pl-s"><span class="pl-pds">"</span>Monday<span class="pl-pds">"</span></span>), <span class="pl-c1">TUESDAY</span>(<span class="pl-s"><span class="pl-pds">"</span>Tuesday<span class="pl-pds">"</span></span>), <span class="pl-c1">WEDNESDAY</span>(<span class="pl-s"><span class="pl-pds">"</span>Wednesday<span class="pl-pds">"</span></span>), <span class="pl-c1">THURSDAY</span>(<span class="pl-s"><span class="pl-pds">"</span>Thursday<span class="pl-pds">"</span></span>), <span class="pl-c1">FRIDAY</span>(<span class="pl-s"><span class="pl-pds">"</span>Friday<span class="pl-pds">"</span></span>), <span class="pl-c1">SATURDAY</span>(<span class="pl-s"><span class="pl-pds">"</span>Saturday<span class="pl-pds">"</span></span>), <span class="pl-c1">SUNDAY</span>(<span class="pl-s"><span class="pl-pds">"</span>Sunday<span class="pl-pds">"</span></span>);
+        <span class="pl-k">private</span> <span class="pl-smi">String</span> day;
+        <span class="pl-k">private</span> <span class="pl-en">Schedule</span>(<span class="pl-smi">String</span> <span class="pl-v">d</span>) {
+            day <span class="pl-k">=</span> d;
+        }
+
+        <span class="pl-k">public</span> <span class="pl-smi">String</span> <span class="pl-en">toString</span>() {
+            <span class="pl-k">return</span> day;
+        }       
+    }
+
+<span class="pl-c1">...</span>
+
+        <span class="pl-k">public</span> <span class="pl-k">void</span> setSchedule(<span class="pl-smi">String</span> day)
+    {
+        <span class="pl-k">boolean</span> found <span class="pl-k">=</span> <span class="pl-c1">false</span>;
+        <span class="pl-k">for</span>(<span class="pl-smi">Schedule</span> d<span class="pl-k">:</span> <span class="pl-smi">Schedule</span><span class="pl-k">.</span>values()){
+            <span class="pl-k">if</span> (d<span class="pl-k">.</span>toString()<span class="pl-k">.</span>equals(day)) {
+              schedule<span class="pl-k">.</span>add(d);
+              found<span class="pl-k">=</span><span class="pl-c1">true</span>;
+            }
+        }
+        <span class="pl-k">if</span> (<span class="pl-k">!</span>found)
+            schedule<span class="pl-k">.</span>add(<span class="pl-smi">Schedule</span><span class="pl-c1"><span class="pl-k">.</span>MONDAY</span>);
+
+    }
+</pre></div>
+
+<h2>
+<a id="use-of-arraylists-and-hashmaps" class="anchor" href="#use-of-arraylists-and-hashmaps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use of ArrayLists and HashMaps</h2>
+
+<p>The current version of the application did not need any Arrays, ArrayLists were used instead.
+One of the applications of ArrayLists was to keep track of a technician's skills:</p>
+
+<div class="highlight highlight-source-java"><pre>
+      <span class="pl-k">private</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">String</span>&gt;</span> skills<span class="pl-k">=</span><span class="pl-k">new</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">String</span>&gt;</span>();
+
+      <span class="pl-k">public</span> <span class="pl-k">void</span> setSkills(<span class="pl-smi">String</span> skill)
+    {
+      skills<span class="pl-k">.</span>add(skill);
+    }
+
+<span class="pl-c1">...</span>
+   <span class="pl-k">public</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">String</span>&gt;</span> getSkills()
+    {
+        <span class="pl-k">return</span> skills;
+    }
+</pre></div>
+
+<p>In order to record paired values of parts names and number in the inventory HashMaps were used:</p>
+
+<div class="highlight highlight-source-java"><pre>    <span class="pl-k">private</span> <span class="pl-smi">HashMap</span> <span class="pl-k">&lt;</span><span class="pl-smi">String</span>, <span class="pl-smi">Integer</span><span class="pl-k">&gt;</span> parts <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">HashMap</span> &lt;<span class="pl-smi">String</span>, <span class="pl-smi">Integer</span>&gt;();
+    <span class="pl-k">public</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">WorkOrder</span>&gt;</span> history <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">WorkOrder</span>&gt;</span>();
+
+    <span class="pl-k">public</span> <span class="pl-k">void</span> findParts (<span class="pl-smi">String</span> modelNumber)
+    {
+        <span class="pl-k">String</span>[] data;
+        <span class="pl-k">try</span> {
+            reader <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">BufferedReader</span>(<span class="pl-k">new</span> <span class="pl-smi">FileReader</span>(<span class="pl-s"><span class="pl-pds">"</span>washParts.csv<span class="pl-pds">"</span></span>));
+            <span class="pl-smi">String</span> line<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>;
+             <span class="pl-k">while</span> (line <span class="pl-k">!=</span> <span class="pl-c1">null</span>)
+                {
+                    line <span class="pl-k">=</span> reader<span class="pl-k">.</span>readLine();
+                    data<span class="pl-k">=</span>line<span class="pl-k">.</span>split(<span class="pl-s"><span class="pl-pds">"</span>,<span class="pl-pds">"</span></span>);
+                    <span class="pl-k">if</span> (data[<span class="pl-c1">0</span>]<span class="pl-k">.</span>equals(modelNumber))
+                    {
+                    <span class="pl-k">for</span> (<span class="pl-k">int</span> i<span class="pl-k">=</span><span class="pl-c1">1</span>; i<span class="pl-k">&lt;</span>data<span class="pl-k">.</span>length; i <span class="pl-k">+=</span> <span class="pl-c1">2</span>){
+                       <span class="pl-smi">String</span> temp <span class="pl-k">=</span> data[i<span class="pl-k">+</span><span class="pl-c1">1</span>];
+                       <span class="pl-k">int</span> number <span class="pl-k">=</span> <span class="pl-smi">Integer</span><span class="pl-k">.</span>parseInt(temp);
+                       <span class="pl-k">if</span> (number<span class="pl-k">!=</span><span class="pl-c1">0</span>)
+                       {
+                       parts<span class="pl-k">.</span>put(data[i], number);  
+                    }
+                     }
+                }
+            }
+            reader<span class="pl-k">.</span>close();
+        }
+        <span class="pl-k">catch</span>(<span class="pl-smi">FileNotFoundException</span> e) {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>File missing<span class="pl-pds">"</span></span>);
+        }
+        <span class="pl-k">catch</span>(<span class="pl-smi">IOException</span> e) {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>NO!<span class="pl-pds">"</span></span>);
+        }
+    }
+</pre></div>
+
+<p>This empplementation allowed then used keys (Part Name) to retrieve values (Number in Stock):</p>
+
+<div class="highlight highlight-source-java"><pre>
+    <span class="pl-k">public</span> <span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Integer</span>&gt;</span> getParts()
+    {
+        <span class="pl-k">return</span> parts;
+    }
+
+    <span class="pl-k">public</span> <span class="pl-k">int</span> numberOfParts (<span class="pl-smi">String</span> partName)
+    {
+        <span class="pl-k">return</span> parts<span class="pl-k">.</span>get(partName);
+    }
+</pre></div>
+
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/koatliky/application">Application</a> is maintained by <a href="https://github.com/koatliky">koatliky</a>.</span>
 
