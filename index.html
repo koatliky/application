@@ -292,7 +292,10 @@ One of the applications of ArrayLists was to keep track of a technician's skills
     }
 </pre></div>
 
-<p>This empplementation allowed then used keys (Part Name) to retrieve values (Number in Stock):</p>
+<h2>
+<a id="algorithms-to-search-for-values" class="anchor" href="#algorithms-to-search-for-values" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algorithms to search for values</h2>
+
+<p>The use of HashMaps allowed then to use keys (Part Name) to retrieve values (Number in Stock) in the Dishwasher class:</p>
 
 <div class="highlight highlight-source-java"><pre>
     <span class="pl-k">public</span> <span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Integer</span>&gt;</span> getParts()
@@ -305,6 +308,38 @@ One of the applications of ArrayLists was to keep track of a technician's skills
         <span class="pl-k">return</span> parts<span class="pl-k">.</span>get(partName);
     }
 </pre></div>
+
+<p>Similarly, ArrayLists allowed to keep track of multiple values for skills in the Tech class:</p>
+
+<div class="highlight highlight-source-java"><pre>
+    <span class="pl-k">public</span> <span class="pl-k">void</span> techInfo()
+    {
+        <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Tech Name: <span class="pl-pds">"</span></span><span class="pl-k">+</span> firstName <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> <span class="pl-k">+</span> lastName);
+        <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Tech Domain: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> type);
+        <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Skills: <span class="pl-pds">"</span></span>);
+        <span class="pl-k">for</span> (<span class="pl-smi">String</span> s<span class="pl-k">:</span> skills)
+        {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>* <span class="pl-pds">"</span></span> <span class="pl-k">+</span> s);
+    }
+        <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Schedule: <span class="pl-pds">"</span></span>);
+        <span class="pl-k">for</span> (<span class="pl-smi">Schedule</span> d<span class="pl-k">:</span> schedule)
+        {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>* <span class="pl-pds">"</span></span> <span class="pl-k">+</span> d);
+    }
+}
+</pre></div>
+
+<h2>
+<a id="uml-diagram" class="anchor" href="#uml-diagram" aria-hidden="true"><span class="octicon octicon-link"></span></a>UML Diagram</h2>
+
+<p><img src="https://lh3.googleusercontent.com/-anNHokI2Gm4/VnAXuSTVP9I/AAAAAAAABQg/yHZevhVtESE/s912-Ic42/UMLDiagram.png" alt="UML"></p>
+
+<h2>
+<a id="inheritances-and-aggregations" class="anchor" href="#inheritances-and-aggregations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Inheritances and Aggregations</h2>
+
+<p>The current version of the Application has 2 groups of inheritances:
+Appliance -&gt;Dishwasher, Fridge, Dryer
+Person -&gt; User, Tech</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/koatliky/application">Application</a> is maintained by <a href="https://github.com/koatliky">koatliky</a>.</span>
