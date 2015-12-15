@@ -130,19 +130,77 @@ information.</p>
 }</pre></div>
 
 <h3>
-<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating pages manually</h3>
+<a id="dishwasher" class="anchor" href="#dishwasher" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dishwasher</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Is a subclass of Aplliances. In addition to the superclass methods, this class keeps track of the parts available in stock, returns the number of parts left.</p>
 
-<h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">java.io.BufferedReader</span>;
+<span class="pl-k">import</span> <span class="pl-smi">java.io.FileNotFoundException</span>;
+<span class="pl-k">import</span> <span class="pl-smi">java.io.FileReader</span>;
+<span class="pl-k">import</span> <span class="pl-smi">java.io.IOException</span>;
+<span class="pl-k">import</span> <span class="pl-smi">java.util.ArrayList</span>;
+<span class="pl-k">import</span> <span class="pl-smi">java.util.HashMap</span>;
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<span class="pl-c">/**</span>
+<span class="pl-c"> * Creates an object of a dishwasher, inherits from Appliance.</span>
+<span class="pl-c"> *</span>
+<span class="pl-c"> * @author (Kate Miz)</span>
+<span class="pl-c"> * @version (1.01)</span>
+<span class="pl-c"> */</span>
 
-<h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">Dishwasher</span> <span class="pl-k">extends</span> <span class="pl-e">Appliance</span>
+{
+    <span class="pl-k">private</span> <span class="pl-smi">BufferedReader</span> reader;
+    <span class="pl-k">private</span> <span class="pl-smi">HashMap</span> <span class="pl-k">&lt;</span><span class="pl-smi">String</span>, <span class="pl-smi">Integer</span><span class="pl-k">&gt;</span> parts <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">HashMap</span> &lt;<span class="pl-smi">String</span>, <span class="pl-smi">Integer</span>&gt;();
+    <span class="pl-k">public</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">WorkOrder</span>&gt;</span> history <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">WorkOrder</span>&gt;</span>();
 
-<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">findParts</span> (<span class="pl-smi">String</span> <span class="pl-v">modelNumber</span>)
+    {
+        <span class="pl-k">String</span>[] data;
+        <span class="pl-k">try</span> {
+            reader <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">BufferedReader</span>(<span class="pl-k">new</span> <span class="pl-smi">FileReader</span>(<span class="pl-s"><span class="pl-pds">"</span>washParts.csv<span class="pl-pds">"</span></span>));
+            <span class="pl-smi">String</span> line<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>;
+             <span class="pl-k">while</span> (line <span class="pl-k">!=</span> <span class="pl-c1">null</span>)
+                {
+                    line <span class="pl-k">=</span> reader<span class="pl-k">.</span>readLine();
+                    data<span class="pl-k">=</span>line<span class="pl-k">.</span>split(<span class="pl-s"><span class="pl-pds">"</span>,<span class="pl-pds">"</span></span>);
+                    <span class="pl-k">if</span> (data[<span class="pl-c1">0</span>]<span class="pl-k">.</span>equals(modelNumber))
+                    {
+                    <span class="pl-k">for</span> (<span class="pl-k">int</span> i<span class="pl-k">=</span><span class="pl-c1">1</span>; i<span class="pl-k">&lt;</span>data<span class="pl-k">.</span>length; i <span class="pl-k">+=</span> <span class="pl-c1">2</span>){
+                       <span class="pl-smi">String</span> temp <span class="pl-k">=</span> data[i<span class="pl-k">+</span><span class="pl-c1">1</span>];
+                       <span class="pl-k">int</span> number <span class="pl-k">=</span> <span class="pl-smi">Integer</span><span class="pl-k">.</span>parseInt(temp);
+                       <span class="pl-k">if</span> (number<span class="pl-k">!=</span><span class="pl-c1">0</span>)
+                       {
+                       parts<span class="pl-k">.</span>put(data[i], number);  
+                    }
+                     }
+                }
+            }
+            reader<span class="pl-k">.</span>close();
+        }
+        <span class="pl-k">catch</span>(<span class="pl-smi">FileNotFoundException</span> e) {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>File missing<span class="pl-pds">"</span></span>);
+        }
+        <span class="pl-k">catch</span>(<span class="pl-smi">IOException</span> e) {
+            <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>NO!<span class="pl-pds">"</span></span>);
+        }
+    }
+
+    <span class="pl-k">public</span> <span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Integer</span>&gt;</span> <span class="pl-en">getParts</span>()
+    {
+        <span class="pl-k">return</span> parts;
+    }
+
+    <span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-en">numberOfParts</span> (<span class="pl-smi">String</span> <span class="pl-v">partName</span>)
+    {
+        <span class="pl-k">return</span> parts<span class="pl-k">.</span>get(partName);
+    }
+
+    <span class="pl-k">public</span> <span class="pl-k">ArrayList&lt;<span class="pl-smi">WorkOrder</span>&gt;</span> <span class="pl-en">getHistory</span> ()
+    {
+        <span class="pl-k">return</span> history;
+    }
+}</pre></div>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/koatliky/application">Application</a> is maintained by <a href="https://github.com/koatliky">koatliky</a>.</span>
